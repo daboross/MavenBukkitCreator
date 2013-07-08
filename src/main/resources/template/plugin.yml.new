@@ -1,0 +1,5 @@
+name: $$NAME
+main: net.daboross.bukkitdev.$$LOWER.$$NAME
+version: 1.0
+author: Dabo Ross
+description: $$DESC
