@@ -50,11 +50,13 @@ public class Main {
             makeProject();
         } catch (IOException ioe) {
             ioe.printStackTrace(System.err);
+        } catch (InterruptedException ie) {
+            ie.printStackTrace(System.err);
         }
     }
 
-    private static void makeProject() throws IOException {
-        String name, desc;
+    private static void makeProject() throws IOException, InterruptedException {
+        String name, desc, gitOriginName;
         while (true) {
             name = ask("What should the project be called?");
             if (askBoolean("Project will be called '" + name + "'. Is this OK?")) {
@@ -67,6 +69,12 @@ public class Main {
                 break;
             }
         }
-        new ProjectCreator(name, desc).create();
+        while (true) {
+            gitOriginName = ask("What is the remote git repository?");
+            if (askBoolean("Remote git repository is '" + gitOriginName + "'. Is this OK?")) {
+                break;
+            }
+        }
+        new ProjectCreator(name, desc, gitOriginName).create();
     }
 }

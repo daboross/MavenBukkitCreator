@@ -23,18 +23,21 @@ public class ProjectCreator {
 
     private final String name, desc;
     private File projectDir, javaDir, resourceDir, targetMainFile, targetPluginYaml, targetPomXml, targetGitIgnore;
+    private final String gitOriginName;
 
-    public ProjectCreator(String name, String desc) {
+    public ProjectCreator(String name, String desc, String gitOriginName) {
         this.name = name;
         this.desc = desc;
+        this.gitOriginName = gitOriginName;
     }
 
-    public void create() throws IOException {
+    public void create() throws IOException, InterruptedException {
         getDirs();
         copyFile(getClass().getResourceAsStream("/template/Main.java.new"), targetMainFile);
         copyFile(getClass().getResourceAsStream("/template/plugin.yml.new"), targetPluginYaml);
         copyFile(getClass().getResourceAsStream("/template/pom.xml.new"), targetPomXml);
         copyFile(getClass().getResourceAsStream("/template/GitIgnore.new"), targetGitIgnore);
+        new GitInit(projectDir, gitOriginName).run();
     }
 
     private void getDirs() {
