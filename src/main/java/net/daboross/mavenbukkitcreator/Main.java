@@ -70,8 +70,8 @@ public class Main {
             }
         }
         while (true) {
-            gitOriginName = ask("What is the remote git repository?");
-            if (askBoolean("Remote git repository is '" + gitOriginName + "'. Is this OK?")) {
+            gitOriginName = ask("What should the remote github repository be named?");
+            if (askBoolean("Remote git repository will be named '" + gitOriginName + "'. Is this OK?")) {
                 break;
             }
         }
