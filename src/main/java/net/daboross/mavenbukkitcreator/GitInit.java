@@ -39,7 +39,7 @@ public class GitInit {
 
     }
 
-    public void run() throws IOException, InterruptedException {
+    public void run(boolean alreadyExists) throws IOException, InterruptedException {
         if (githubName != null && originName.length() > 0) {
             Runtime r = Runtime.getRuntime();
             Process create = r.exec(new String[]{
@@ -47,20 +47,22 @@ public class GitInit {
                 "{\"name\": \"" + githubName + "\",\"description\": \"" + projectDesc + "\",\"auto_init\": true}",
                 "https://api.github.com/user/repos"}, null, projectDir);
             create.waitFor();
-            writeToConsole(create.getErrorStream());
-            writeToConsole(create.getInputStream());
-            Process init = r.exec(new String[]{"git", "init"}, null, projectDir);
-            init.waitFor();
-            writeToConsole(init.getErrorStream());
-            writeToConsole(init.getInputStream());
-            Process add = r.exec(new String[]{"git", "add", "-A"}, null, projectDir);
-            add.waitFor();
-            writeToConsole(add.getErrorStream());
-            writeToConsole(add.getInputStream());
-            Process commit = r.exec(new String[]{"git", "commit", "-a", "-m", "Initial Commit"}, null, projectDir);
-            commit.waitFor();
-            writeToConsole(commit.getErrorStream());
-            writeToConsole(commit.getInputStream());
+            if (!alreadyExists) {
+                writeToConsole(create.getErrorStream());
+                writeToConsole(create.getInputStream());
+                Process init = r.exec(new String[]{"git", "init"}, null, projectDir);
+                init.waitFor();
+                writeToConsole(init.getErrorStream());
+                writeToConsole(init.getInputStream());
+                Process add = r.exec(new String[]{"git", "add", "-A"}, null, projectDir);
+                add.waitFor();
+                writeToConsole(add.getErrorStream());
+                writeToConsole(add.getInputStream());
+                Process commit = r.exec(new String[]{"git", "commit", "-a", "-m", "Initial Commit"}, null, projectDir);
+                commit.waitFor();
+                writeToConsole(commit.getErrorStream());
+                writeToConsole(commit.getInputStream());
+            }
             Process remote = r.exec(new String[]{"git", "remote", "add", "origin", originName}, null, projectDir);
             remote.waitFor();
             writeToConsole(remote.getErrorStream());

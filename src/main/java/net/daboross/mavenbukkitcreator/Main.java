@@ -17,6 +17,7 @@
 package net.daboross.mavenbukkitcreator;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -58,7 +59,11 @@ public class Main {
     public static void main(String[] args) {
         try {
             init();
-            makeProject();
+            if (args.length > 0 && args[0].equalsIgnoreCase("gr")) {
+                makeGithub();
+            } else {
+                makeProject();
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace(System.err);
         } catch (InterruptedException ie) {
@@ -68,7 +73,7 @@ public class Main {
 
     private static void makeProject() throws IOException, InterruptedException {
         String name, desc, gitOriginName;
-        boolean isPluginRequest;
+        boolean isPluginRequest, justGit;
         while (true) {
             name = ask("What should the project be called?");
             desc = ask("What should the project's description be?");
@@ -83,5 +88,26 @@ public class Main {
             }
         }
         new ProjectCreator(name, desc, gitOriginName, isPluginRequest).create();
+    }
+
+    private static void makeGithub() throws IOException, InterruptedException {
+        String name, desc, gitOriginName, folder;
+        while (true) {
+            desc = ask("What is the project's description?");
+            folder = ask("What is the folder?");
+            gitOriginName = ask("What should the remote github repository be named?");
+            if (askBoolean("Project's description is '" + desc + "'.\n"
+                    + "Remote git repository will be named '" + gitOriginName + "'.\n"
+                    + "Folder is '" + folder + "'\n"
+                    + "Is this correct?")) {
+                break;
+            }
+        }
+        File projectDir = new File(folder);
+        if (!projectDir.exists()) {
+            System.err.println("Folder doesn't exist!");
+            System.exit(1);
+        }
+        new GitInit(projectDir, gitOriginName, desc).run(true);
     }
 }
