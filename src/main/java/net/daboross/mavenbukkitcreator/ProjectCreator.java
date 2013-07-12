@@ -52,7 +52,7 @@ public class ProjectCreator {
         copyFile(getClass().getResourceAsStream("/template/GitIgnore.new"), targetGitIgnore);
         copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicense);
         copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicenseMd);
-        new GitInit(projectDir, gitProjectName, desc).run();
+        new GitInit(projectDir, gitProjectName, desc).run(false);
     }
 
     private void getDirs() {
