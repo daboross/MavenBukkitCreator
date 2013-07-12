@@ -59,8 +59,13 @@ public class Main {
     public static void main(String[] args) {
         try {
             init();
-            if (args.length > 0 && args[0].equalsIgnoreCase("gr")) {
-                makeGithub();
+            if (args.length > 0) {
+                if (args[0].equalsIgnoreCase("gr")) {
+                    System.out.println("Creating ONLY github remote");
+                    makeGithub();
+                } else {
+                    System.out.println("Unknown param " + args[0]);
+                }
             } else {
                 makeProject();
             }
@@ -73,7 +78,7 @@ public class Main {
 
     private static void makeProject() throws IOException, InterruptedException {
         String name, desc, gitOriginName;
-        boolean isPluginRequest, justGit;
+        boolean isPluginRequest;
         while (true) {
             name = ask("What should the project be called?");
             desc = ask("What should the project's description be?");
