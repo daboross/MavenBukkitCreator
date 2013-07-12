@@ -53,7 +53,7 @@ public class GitInit {
             init.waitFor();
             writeToConsole(init.getErrorStream());
             writeToConsole(init.getInputStream());
-            Process add = r.exec(new String[]{"git", "add", "."}, null, projectDir);
+            Process add = r.exec(new String[]{"git", "add", "-A"}, null, projectDir);
             add.waitFor();
             writeToConsole(add.getErrorStream());
             writeToConsole(add.getInputStream());
