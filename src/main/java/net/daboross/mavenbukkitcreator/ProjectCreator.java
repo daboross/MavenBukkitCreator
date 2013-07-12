@@ -1,7 +1,18 @@
 /*
- * Author: Dabo Ross
- * Website: www.daboross.net
- * Email: daboross@daboross.net
+ * Copyright (C) 2013 Dabo Ross <http://www.daboross.net/>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.daboross.mavenbukkitcreator;
 
@@ -22,7 +33,7 @@ import java.util.regex.Matcher;
 public class ProjectCreator {
 
     private final String name, desc;
-    private File projectDir, javaDir, resourceDir, targetMainFile, targetPluginYaml, targetPomXml, targetGitIgnore;
+    private File projectDir, javaDir, resourceDir, targetMainFile, targetPluginYaml, targetPomXml, targetGitIgnore, targetLicenseMd, targetLicense;
     private final String gitProjectName;
 
     public ProjectCreator(String name, String desc, String gitProjectName) {
@@ -37,6 +48,8 @@ public class ProjectCreator {
         copyFile(getClass().getResourceAsStream("/template/plugin.yml.new"), targetPluginYaml);
         copyFile(getClass().getResourceAsStream("/template/pom.xml.new"), targetPomXml);
         copyFile(getClass().getResourceAsStream("/template/GitIgnore.new"), targetGitIgnore);
+        copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicense);
+        copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicenseMd);
         new GitInit(projectDir, gitProjectName, desc).run();
     }
 
@@ -53,7 +66,9 @@ public class ProjectCreator {
         resourceDir.mkdirs();
         targetMainFile = new File(javaDir, name + ".java");
         targetPluginYaml = new File(resourceDir, "plugin.yml");
+        targetLicense = new File(resourceDir, "LICENSE");
         targetPomXml = new File(projectDir, "pom.xml");
+        targetLicenseMd = new File(projectDir, "LICENSE.md");
         targetGitIgnore = new File(projectDir, ".gitignore");
     }
 
