@@ -42,15 +42,15 @@ public class Main {
     }
 
     private static boolean askBoolean(String question) throws IOException {
-        out.printf(question + "\n> ");
+        out.printf(question + "\n([Y]es/[N]o)> ");
         while (true) {
             String line = in.readLine();
-            if (line.equalsIgnoreCase("yes")) {
+            if (line.equalsIgnoreCase("y")) {
                 return true;
-            } else if (line.equalsIgnoreCase("no")) {
+            } else if (line.equalsIgnoreCase("n")) {
                 return false;
             } else {
-                out.printf("'" + line + "' isn't a valid answer.\n(yes or no)> ");
+                out.printf("'" + line + "' isn't a valid answer.\n([Y]es/[N]o)> ");
             }
         }
     }
@@ -70,19 +70,12 @@ public class Main {
         String name, desc, gitOriginName;
         while (true) {
             name = ask("What should the project be called?");
-            if (askBoolean("Project will be called '" + name + "'. Is this OK?")) {
-                break;
-            }
-        }
-        while (true) {
             desc = ask("What should the project's description be?");
-            if (askBoolean("Project will be described as '" + desc + "'. Is this OK?")) {
-                break;
-            }
-        }
-        while (true) {
             gitOriginName = ask("What should the remote github repository be named?");
-            if (askBoolean("Remote git repository will be named '" + gitOriginName + "'. Is this OK?")) {
+            if (askBoolean("Project will be called '" + name + "'.\n"
+                    + "Project will be described as '" + desc + "'.\n"
+                    + "Remote git repository will be named '" + gitOriginName + "'.\n"
+                    + "Is this OK?")) {
                 break;
             }
         }
