@@ -68,17 +68,20 @@ public class Main {
 
     private static void makeProject() throws IOException, InterruptedException {
         String name, desc, gitOriginName;
+        boolean isPluginRequest;
         while (true) {
             name = ask("What should the project be called?");
             desc = ask("What should the project's description be?");
             gitOriginName = ask("What should the remote github repository be named?");
+            isPluginRequest = askBoolean("Is this plugin a request?");
             if (askBoolean("Project will be called '" + name + "'.\n"
                     + "Project will be described as '" + desc + "'.\n"
                     + "Remote git repository will be named '" + gitOriginName + "'.\n"
+                    + "Plugin " + (isPluginRequest ? "is" : "is not") + " a plugin request.s\n"
                     + "Is this OK?")) {
                 break;
             }
         }
-        new ProjectCreator(name, desc, gitOriginName).create();
+        new ProjectCreator(name, desc, gitOriginName, isPluginRequest).create();
     }
 }

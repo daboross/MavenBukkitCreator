@@ -35,11 +35,13 @@ public class ProjectCreator {
     private final String name, desc;
     private File projectDir, javaDir, resourceDir, targetMainFile, targetPluginYaml, targetPomXml, targetGitIgnore, targetLicenseMd, targetLicense;
     private final String gitProjectName;
+    private final boolean isPluginRequest;
 
-    public ProjectCreator(String name, String desc, String gitProjectName) {
+    public ProjectCreator(String name, String desc, String gitProjectName, boolean isPluginRequest) {
         this.name = name;
         this.desc = desc;
         this.gitProjectName = gitProjectName;
+        this.isPluginRequest = isPluginRequest;
     }
 
     public void create() throws IOException, InterruptedException {
