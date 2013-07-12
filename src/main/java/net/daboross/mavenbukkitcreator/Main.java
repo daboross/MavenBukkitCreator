@@ -113,6 +113,6 @@ public class Main {
             System.err.println("Folder doesn't exist!");
             System.exit(1);
         }
-        new GitInit(projectDir, gitOriginName, desc).run(true);
+        new GitCreator(projectDir, gitOriginName, desc).run(true);
     }
 }
