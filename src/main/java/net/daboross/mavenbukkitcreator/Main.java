@@ -91,7 +91,7 @@ public class Main {
     }
 
     private static void makeGithub() throws IOException, InterruptedException {
-        String name, desc, gitOriginName, folder;
+        String desc, gitOriginName, folder;
         while (true) {
             desc = ask("What is the project's description?");
             folder = ask("What is the folder?");
