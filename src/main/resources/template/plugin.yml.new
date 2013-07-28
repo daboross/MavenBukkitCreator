@@ -1,5 +1,5 @@
 name: $$NAME
-main: net.daboross.bukkitdev.$$LOWER.$$NAME
-version: 1.0
+main: net.daboross.bukkitdev.$$LOWER.$$NAMEPlugin
+version: ${project.version}
 author: Dabo Ross
 description: $$DESC

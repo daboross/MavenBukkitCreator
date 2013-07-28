@@ -33,7 +33,8 @@ import java.util.regex.Matcher;
 public class ProjectCreator {
 
 	private final String name, desc;
-	private File projectDir, javaDir, resourceDir, targetMainFile, targetPluginYaml, targetPomXml, targetGitIgnore, targetLicenseMd, targetLicense;
+	private File projectDirectory, sourceDirectory, resourceDirectory,
+			targetPluginFile, targetPluginYaml, targetPomXml, targetGitIgnore, targetTravisYaml, targetLicense;
 	private final String gitProjectName;
 	private final boolean isPluginRequest;
 
@@ -46,32 +47,32 @@ public class ProjectCreator {
 
 	public void create() throws IOException, InterruptedException {
 		getDirs();
-		copyFile(getClass().getResourceAsStream("/template/Main.java.new"), targetMainFile);
+		copyFile(getClass().getResourceAsStream("/template/Plugin.java.new"), targetPluginFile);
 		copyFile(getClass().getResourceAsStream("/template/plugin.yml.new"), targetPluginYaml);
 		copyFile(getClass().getResourceAsStream("/template/pom.xml.new"), targetPomXml);
-		copyFile(getClass().getResourceAsStream("/template/GitIgnore.new"), targetGitIgnore);
+		copyFile(getClass().getResourceAsStream("/template/.gitignore.new"), targetGitIgnore);
+		copyFile(getClass().getResourceAsStream("/template/.travis.yml.new"), targetTravisYaml);
 		copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicense);
-		copyFile(getClass().getResourceAsStream("/LICENSE"), targetLicenseMd);
-		new GitCreator(projectDir, gitProjectName, desc).run(false);
+		new GitCreator(projectDirectory, gitProjectName, desc).run(false);
 	}
 
 	private void getDirs() {
-		projectDir = new File((isPluginRequest ? "Request-" : "Private-") + name);
-		if (projectDir.exists()) {
+		projectDirectory = new File((isPluginRequest ? "Request-" : "Private-") + name);
+		if (projectDirectory.exists()) {
 			System.err.println("Project Directory Exists!");
 			System.exit(1);
 		}
-		projectDir.mkdirs();
-		javaDir = new File(new File(new File(new File(new File(new File(new File(projectDir, "src"), "main"), "java"), "net"), "daboross"), "bukkitdev"), name.toLowerCase());
-		resourceDir = new File(new File(new File(projectDir, "src"), "main"), "resources");
-		javaDir.mkdirs();
-		resourceDir.mkdirs();
-		targetMainFile = new File(javaDir, name + ".java");
-		targetPluginYaml = new File(resourceDir, "plugin.yml");
-		targetLicense = new File(resourceDir, "LICENSE");
-		targetPomXml = new File(projectDir, "pom.xml");
-		targetLicenseMd = new File(projectDir, "LICENSE.md");
-		targetGitIgnore = new File(projectDir, ".gitignore");
+		projectDirectory.mkdirs();
+		sourceDirectory = new File(new File(new File(new File(new File(new File(new File(projectDirectory, "src"), "main"), "java"), "net"), "daboross"), "bukkitdev"), name.toLowerCase());
+		resourceDirectory = new File(new File(new File(projectDirectory, "src"), "main"), "resources");
+		sourceDirectory.mkdirs();
+		resourceDirectory.mkdirs();
+		targetPluginFile = new File(sourceDirectory, name + "Plugin.java");
+		targetPluginYaml = new File(resourceDirectory, "plugin.yml");
+		targetLicense = new File(projectDirectory, "LICENSE");
+		targetPomXml = new File(projectDirectory, "pom.xml");
+		targetTravisYaml = new File(projectDirectory, ".travis.yml");
+		targetGitIgnore = new File(projectDirectory, ".gitignore");
 	}
 
 	private void copyFile(InputStream input, File output) throws IOException {
