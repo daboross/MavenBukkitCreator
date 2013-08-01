@@ -87,8 +87,8 @@ public class Main {
             if (askBoolean("Project will be called '" + name + "'.\n"
                     + "Project will be described as '" + desc + "'.\n"
                     + "Remote git repository will be named '" + gitOriginName + "'.\n"
-                    + "Plugin " + (isPluginRequest ? "is" : "is not") + " a plugin request.s\n"
-                    + "Is this OK?")) {
+                    + "Plugin " + (isPluginRequest ? "is" : "is not") + " a plugin request.\n"
+                    + "Is this okay?")) {
                 break;
             }
         }

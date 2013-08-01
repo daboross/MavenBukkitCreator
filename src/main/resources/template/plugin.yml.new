@@ -1,4 +1,4 @@
-name: $$NAME
+name: ${project.name}
 main: net.daboross.bukkitdev.$$LOWER.$$NAMEPlugin
 version: ${project.version}
 author: Dabo Ross
