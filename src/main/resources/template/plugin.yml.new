@@ -3,3 +3,4 @@ main: net.daboross.bukkitdev.$$LOWER.$$NAMEPlugin
 version: ${project.version}
 author: Dabo Ross
 description: $$DESC
+url: https://github.com/daboross/$$GITHUBNAME

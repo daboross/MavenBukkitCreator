@@ -85,7 +85,8 @@ public class ProjectCreator {
         while ((line = bufferedReader.readLine()) != null) {
             printWriter.println(line.replaceAll(Matcher.quoteReplacement("$$NAME"), name)
                     .replaceAll(Matcher.quoteReplacement("$$LOWER"), name.toLowerCase())
-                    .replaceAll(Matcher.quoteReplacement("$$DESC"), desc));
+                    .replaceAll(Matcher.quoteReplacement("$$DESC"), desc)
+                    .replaceAll(Matcher.quoteReplacement("$$GITHUBNAME"), gitProjectName));
         }
         bufferedReader.close();
         inputStreamReader.close();
