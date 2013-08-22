@@ -27,7 +27,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/daboross/$$GITHUBNAME.git</url>
+        <url>https://github.com/daboross/$$GITHUBNAME</url>
         <connection>scm:git:https://github.com/daboross/$$GITHUBNAME.git</connection>
         <developerConnection>scm:git:git@github.com:daboross/$$GITHUBNAME.git</developerConnection>
     </scm>
