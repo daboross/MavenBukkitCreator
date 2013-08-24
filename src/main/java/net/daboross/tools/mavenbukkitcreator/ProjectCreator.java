@@ -36,13 +36,11 @@ public class ProjectCreator {
     private File projectDirectory, sourceDirectory, resourceDirectory,
             targetPluginFile, targetPluginYaml, targetPomXml, targetGitIgnore, targetTravisYaml, targetLicense;
     private final String gitProjectName;
-    private final boolean isPluginRequest;
 
     public ProjectCreator(String name, String desc, String gitProjectName, boolean isPluginRequest) {
         this.name = name;
         this.desc = desc;
         this.gitProjectName = gitProjectName;
-        this.isPluginRequest = isPluginRequest;
     }
 
     public void create() throws IOException, InterruptedException {
@@ -57,7 +55,7 @@ public class ProjectCreator {
     }
 
     private void getDirs() {
-        projectDirectory = new File((isPluginRequest ? "Request-" : "Private-") + name);
+        projectDirectory = new File(name);
         if (projectDirectory.exists()) {
             System.err.println("Project Directory Exists!");
             System.exit(1);
