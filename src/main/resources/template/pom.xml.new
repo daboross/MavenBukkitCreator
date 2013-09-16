@@ -35,11 +35,12 @@
         <netbeans.hint.license>gpl3</netbeans.hint.license>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.2-R0.1</version>
+            <version>1.6.2-R1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -55,8 +56,8 @@
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
         <repository>
-            <id>mcstats-repo</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
+            <id>repo-daboross-net</id>
+            <url>http://repo.daboross.net/</url>
         </repository>
     </repositories>
 
@@ -75,37 +76,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
+                <version>3.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -135,8 +110,17 @@
             </plugin>
         </plugins>
     </build>
+
     <issueManagement>
         <url>https://github.com/daboross/$$GITHUBNAME.git</url>
         <system>Github Issues</system>
     </issueManagement>
+    <distributionManagement>
+        <repository>
+            <id>repo-daboross-net</id>
+            <name>repo.daboross.net</name>
+            <uniqueVersion>false</uniqueVersion>
+            <url>scp://repo.daboross.net/repo/</url>
+        </repository>
+    </distributionManagement>
 </project>
