@@ -24,7 +24,6 @@ import java.io.Reader;
 import static java.lang.System.out;
 
 /**
- *
  * @author daboross
  */
 public class Main {
